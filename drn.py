@@ -1,5 +1,5 @@
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 
 def build_network(config):
     n_in, n_layers, n_nodes, n_out, q, hidden_q = config.n_in, config.n_layers, config.n_nodes, config.n_out, config.q, config.hidden_q
@@ -28,7 +28,7 @@ def build_network(config):
                 h, Wi, Bi = fully_connected(x, n_in, n_nodes, q, hidden_q)
             W.append(Wi)
             B.append(Bi)
-        for layer in xrange(2, config.n_layers + 1):
+        for layer in range(2, config.n_layers + 1):
             with tf.variable_scope("l" + str(layer)):
                 if config.load_W_from_file:
                     h, Wi, Bi = fully_connected(h, n_nodes, n_nodes, hidden_q, hidden_q, loadparam=True,
@@ -73,8 +73,8 @@ def cal_logexp_bias(B, q):
 def initD(ql, qu):
     # initialize constant matrix D(s1,s0), only depends on q, s1 is upper, s0 is lower
     D_np = np.zeros((qu, ql))
-    for s1 in xrange(qu):
-        for s0 in xrange(ql):
+    for s1 in range(qu):
+        for s0 in range(ql):
             D_np[s1, s0] = np.exp(-((float(s0)/ql - float(s1)/qu) ** 2))
     return D_np
 

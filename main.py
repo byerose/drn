@@ -1,10 +1,10 @@
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import numpy as np
 from drn import *
 import config
 import time
 import utils
-
+tf.compat.v1.disable_eager_execution()
 np.random.seed(config.seed)
 tf.set_random_seed(config.seed)
 
@@ -34,7 +34,7 @@ train = tf.train.AdamOptimizer(learning_rate=config.learning_rate).minimize(mse_
 with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
     t0 = time.time()
-    for epoch in xrange(config.Nepoch):
+    for epoch in range(config.Nepoch):
         avg_mse_loss = 0.0
         avg_djs_loss = 0.0
         # Loop over all batches
