@@ -1,3 +1,7 @@
+reproducing in 04.2022
+
+---
+
 # A compact network learning model for distribution regression
 
 ## Distribution regression network (DRN)
